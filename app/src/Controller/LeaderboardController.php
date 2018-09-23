@@ -4,8 +4,10 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class LeaderboardController
+class LeaderboardController extends AbstractController
 {
     public function number()
     {
@@ -16,10 +18,11 @@ class LeaderboardController
         );
     }
 
+    /**
+    * @Route("/", name="welcome")
+    */
     public function home()
     {
-        return new Response(
-            '<html><body><h1>Welcome</h1></body></html>'
-        );
+        return $this->render('homepage.html.twig');
     }
 }
