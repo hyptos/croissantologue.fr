@@ -1,3 +1,11 @@
 index:
     path: /
     controller: App\Controller\LeaderboardController::home
+
+  dashboard:
+    path: /
+    controller: App\Controller\LeaderboardController::dashboard
+
+login:
+  path: /
+  controller: App\Controller\SecurityController::login
