@@ -2,10 +2,10 @@ index:
     path: /
     controller: App\Controller\LeaderboardController::home
 
-  dashboard:
-    path: /
-    controller: App\Controller\LeaderboardController::dashboard
+dashboard:
+  path: /dashboard
+  controller: App\Controller\LeaderboardController::dashboard
 
 login:
-  path: /
+  path: /login
   controller: App\Controller\SecurityController::login
