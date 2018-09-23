@@ -1,4 +1,4 @@
-<?php /** @noinspection ALL */
+<?php
 
 // src/Controller/LeaderboardController.php
 namespace App\Controller;
@@ -9,15 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LeaderboardController extends AbstractController
 {
-    public function number()
-    {
-        $number = random_int(0, 100);
-
-        return new Response(
-            '<html><body>Lucky number: '.$number.'</body></html>'
-        );
-    }
-
     /**
     * @Route("/", name="welcome")
     */
