@@ -6,6 +6,10 @@ dashboard:
   path: /dashboard
   controller: App\Controller\LeaderboardController::dashboard
 
+forgot:
+  path: /forgot_password
+  controller: App\Controller\SecurityController::forgot_password
+
 login:
   path: /login
   controller: App\Controller\SecurityController::login
