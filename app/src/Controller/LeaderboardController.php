@@ -16,4 +16,12 @@ class LeaderboardController extends AbstractController
     {
         return $this->render('homepage.html.twig');
     }
+
+    /**
+     * @Route("/dashboard", name="welcome")
+     */
+    public function dashboard()
+    {
+        return $this->render('homepage.html.twig');
+    }
 }
