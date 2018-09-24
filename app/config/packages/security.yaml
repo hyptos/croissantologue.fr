@@ -21,8 +21,6 @@ security:
             security: false
         main:
             anonymous: ~
-            pattern:    ^/
-            http_basic: ~
             provider: doctrine
             form_login:
                 target_path_parameter: go_to
