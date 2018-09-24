@@ -21,7 +21,7 @@ security:
             security: false
         main:
             anonymous: ~
-            provider: doctrine
+            provider: user
             form_login:
                 target_path_parameter: go_to
                 failure_path_parameter: back_to
