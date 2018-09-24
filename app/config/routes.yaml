@@ -13,3 +13,6 @@ forgot_password:
 login:
   path: /login
   controller: App\Controller\SecurityController::login
+
+logout:
+  path: /logout
