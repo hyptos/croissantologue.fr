@@ -9,17 +9,12 @@
 // src/Entity/User.php
 namespace App\Entity;
 
-
-use Doctrine\ORM\Mapping as ORM ;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields="email", message="Cet email est déjà enregistré en base.")
- * @UniqueEntity(fields="username", message="Cet identifiant est déjà enregistré en base")
  */
 class User implements UserInterface, \Serializable
 {
@@ -32,8 +27,6 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=25, unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Length(max=25)
      */
     private $username;
 
@@ -43,10 +36,7 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=60, unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Length(max=60)
-     * @Assert\Email()
+     * @ORM\Column(type="string", length=254, unique=true)
      */
     private $email;
 
@@ -58,14 +48,8 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = true;
-    }
-
-    /*
-     * Get id
-     */
-    public function getId()
-    {
-        return $this->id;
+        // may not be needed, see section on salt below
+        // $this->salt = md5(uniqid('', true));
     }
 
     public function getUsername()
@@ -73,64 +57,21 @@ class User implements UserInterface, \Serializable
         return $this->username;
     }
 
-    public function setUsername($username)
+    public function getSalt()
     {
-        $this->username = $username;
-        return $this;
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
     }
-
 
     public function getPassword()
     {
         return $this->password;
     }
 
-    public function setPassword($password)
+    public function getRoles()
     {
-        $this->password = $password;
-        return $this;
-    }
-
-    /*
-     * Get email
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /*
-     * Set email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-    /*
-     * Get isActive
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
-
-    /*
-     * Set isActive
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-        return $this;
-    }
-
-    public function getSalt()
-    {
-        // pas besoin de salt puisque nous allons utiliser bcrypt
-        // attention si vous utilisez une méthode d'encodage différente !
-        // il faudra décommenter les lignes concernant le salt, créer la propriété correspondante, et renvoyer sa valeur dans cette méthode
-        return null;
+        return array('ROLE_USER');
     }
 
     public function eraseCredentials()
@@ -144,8 +85,7 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            $this->isActive,
-            // voir remarques sur salt plus haut
+            // see section on salt below
             // $this->salt,
         ));
     }
@@ -157,10 +97,8 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            $this->isActive,
-            // voir remarques sur salt plus haut
+            // see section on salt below
             // $this->salt
-            ) = unserialize($serialized);
+            ) = unserialize($serialized, array('allowed_classes' => false));
     }
-
 }
