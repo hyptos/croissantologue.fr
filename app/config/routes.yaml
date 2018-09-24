@@ -16,3 +16,6 @@ login:
 
 logout:
   path: /logout
+
+registration:
+  path: /registration
