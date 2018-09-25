@@ -6,22 +6,18 @@ security:
 #    providers:
 #        in_memory: { memory: ~ }
     encoders:
-        App\Entity\User:
+        App\Security\User\WebserviceUser:
             algorithm: bcrypt
+            cost: 12
     providers:
-        doctrine:
-            entity:
-                class: App\Entity\User
-                property: username
-                # if you're using multiple entity managers
-                # manager_name: customer
+        webservice:
+            id: App\Security\User\WebserviceUserProvider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: ~
-            provider: App\Entity\User
             form_login:
                 target_path_parameter: go_to
                 failure_path_parameter: back_to
