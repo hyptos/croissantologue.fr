@@ -2,11 +2,11 @@ security:
   encoders:
     App\Entity\User:
       algorithm: bcrypt
-    providers:
-      our_db_provider:
-        entity:
-          class: App\Entity\User
-          property: username
+  providers:
+    our_db_provider:
+      entity:
+        class: App\Entity\User
+        property: username
     firewalls:
       main:
         pattern:    ^/
