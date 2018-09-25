@@ -14,8 +14,12 @@ login:
   path: /login
   controller: App\Controller\SecurityController::login
 
+admin:
+  path: /profile
+  controller: App\Controller\ProfileController::profile
+
 logout:
   path: /logout
 
-registration:
-  path: /registration
+register:
+  path: /register
