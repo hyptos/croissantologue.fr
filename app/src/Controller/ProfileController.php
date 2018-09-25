@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileController extends Controller {
 
     /**
-     * @Route("/"profile)
+     * @Route("/profile")
      */
     public function index() {
         return $this->render('profile/index.html.twig', ['mainNavMember'=>true, 'title'=>'Espace Membre']);
