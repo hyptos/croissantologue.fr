@@ -2,7 +2,7 @@ index:
     path: /
     controller: App\Controller\LeaderboardController::home
 
-dashboard:
+leaderboard:
   path: /dashboard
   controller: App\Controller\LeaderboardController::dashboard
 
@@ -21,5 +21,6 @@ admin:
 logout:
   path: /logout
 
-register:
+registration:
   path: /register
+  controller: App\Controller\RegistrationController::register
