@@ -1,41 +1,17 @@
 security:
-
-
-
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
-#    providers:
-#        in_memory: { memory: ~ }
-    encoders:
-        App\Security\User\WebserviceUser:
-            algorithm: bcrypt
-            cost: 12
+  encoders:
+    App\Entity\User:
+      algorithm: bcrypt
     providers:
-        webservice:
-            id: App\Security\User\WebserviceUserProvider
+      user_provider:
+        entity:
+          class: App\Entity\User
+          property: username
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        main:
-            anonymous: ~
-            form_login:
-                target_path_parameter: go_to
-                failure_path_parameter: back_to
-                always_use_default_target_path: true
-                login_path: login
-                check_path: login
-                csrf_token_generator: security.csrf.token_manager
-            logout:
-                path: /deconnexion
-                target: /
-
-            # activate different ways to authenticate
-
-            # http_basic: true
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: true
-            # https://symfony.com/doc/current/security/form_login_setup.html
+      main:
+        pattern:    ^/
+        http_basic: ~
+        provider: user_provider
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
