@@ -25,12 +25,4 @@ class SecurityController extends AbstractController
             'error'         => $error,
         ));
     }
-
-    /**
-     * @Route("/forgot_password", name="forgot password")
-     */
-    public function forgot_password()
-    {
-        return $this->render('security/forgot_password.html.twig');
-    }
 }

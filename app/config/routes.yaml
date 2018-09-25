@@ -6,10 +6,6 @@ leaderboard:
   path: /dashboard
   controller: App\Controller\LeaderboardController::dashboard
 
-forgot_password:
-  path: /forgot_password
-  controller: App\Controller\SecurityController::forgot_password
-
 login:
   path: /login
   controller: App\Controller\SecurityController::login
@@ -18,9 +14,10 @@ admin:
   path: /profile
   controller: App\Controller\ProfileController::profile
 
-logout:
-  path: /logout
-
 registration:
   path: /register
   controller: App\Controller\RegistrationController::register
+
+logout:
+  path: /logout
+
