@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
 /** @Route("/profile") */
-class MemberController extends Controller {
+class ProfileController extends Controller {
 
     /**
      * @Route("/")
