@@ -3,6 +3,7 @@
 // src/Controller/SecurityController.php
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -16,6 +17,17 @@ class SecurityController extends AbstractController
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = new User();
+        $user->setEmail("jean@neige.fr");
+        $user->setIsActive(true);
+        $user->setPassword('wesh');
+        $entityManager->persist($user);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();
+
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
