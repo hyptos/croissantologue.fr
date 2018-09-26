@@ -61,6 +61,10 @@ class User implements UserInterface, \Serializable {
         return $this->email;
     }
 
+    public function setUsername() {
+        return $this->username;
+    }
+
     public function getSalt() {
         // you *may* need a real salt depending on your encoder
         // see section on salt below
