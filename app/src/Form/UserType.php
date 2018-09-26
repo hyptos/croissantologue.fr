@@ -24,6 +24,7 @@ class UserType extends AbstractType
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
             ))
+            ->add('save', SubmitType::class, array('label' => 'Envoyer'))
         ;
     }
 
