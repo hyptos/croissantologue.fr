@@ -57,14 +57,6 @@ class User implements UserInterface, \Serializable {
         // $this->salt = md5(uniqid('', true));
     }
 
-    public function getUsername() {
-        return $this->email;
-    }
-
-    public function setUsername() {
-        return $this->username;
-    }
-
     public function getSalt() {
         // you *may* need a real salt depending on your encoder
         // see section on salt below
