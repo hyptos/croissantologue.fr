@@ -44,7 +44,7 @@ class RegistrationController extends AbstractController
             // maybe set a "flash" success message for the user
             $this->addFlash('success', 'Votre compte à bien été enregistré.');
 
-            return $this->redirectToRoute('/profile');
+            return $this->redirectToRoute('/admin');
         }
 
         return $this->render(
