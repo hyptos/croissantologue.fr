@@ -12,7 +12,7 @@ login:
 
 admin:
   path: /profile
-  controller: App\Controller\ProfileController::profile
+  controller: App\Controller\ProfileController::index
 
 registration:
   path: /register
