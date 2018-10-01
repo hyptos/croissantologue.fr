@@ -18,6 +18,10 @@ registration:
   path: /register
   controller: App\Controller\RegistrationController::register
 
+deploy:
+  path: /deploy
+  controller: App\Controller\DeployController::index
+
 logout:
   path: /logout
 
