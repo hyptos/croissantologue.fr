@@ -17,10 +17,9 @@ class DeployController extends AbstractController
 	$commands = array(
 		'echo $PWD',
 		'whoami',
-		'cd ../..',
-		'git pull',
+		'git pull /home/git/croissantologue.fr/',
 		'git status',
-		'composer install',
+		'composer install /home/git/croissantologue.fr/app/',
 	);
 	// Run the commands for output
 	$output = '';
