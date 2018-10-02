@@ -1,0 +1,23 @@
+index:
+    path: /
+    controller: App\Controller\LeaderboardController::home
+
+leaderboard:
+  path: /dashboard
+  controller: App\Controller\LeaderboardController::dashboard
+
+login:
+  path: /login
+  controller: App\Controller\SecurityController::login
+
+admin:
+  path: /profile
+  controller: App\Controller\ProfileController::index
+
+registration:
+  path: /register
+  controller: App\Controller\RegistrationController::register
+
+logout:
+  path: /logout
+
