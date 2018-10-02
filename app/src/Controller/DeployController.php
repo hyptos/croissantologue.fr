@@ -25,7 +25,7 @@ class DeployController extends AbstractController
 	$output = '';
 	foreach($commands AS $command){
 		// Run it
-		$tmp = shell_exec($command);
+		$tmp = system($command);
 		// Output
 		$output .= "<span style=\"color: #6BE234;\">\$</span> <span style=\"color: #729FCF;\">{$command}\n</span><br />";
 		$output .= htmlentities(trim($tmp)) . "<br />";
