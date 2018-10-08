@@ -16,7 +16,7 @@ class DeployController extends AbstractController
         $old_path = getcwd();
         chdir('/home/git/croissantologue.fr/');
         //make sure to make the shell file executeable first before running the shell_exec function
-        $output = shell_exec('./deploy.sh');
+        system('./deploy.sh', $output);
         chdir($old_path);
     
 	return new Response(
