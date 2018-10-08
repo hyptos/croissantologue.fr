@@ -13,23 +13,11 @@ class DeployController extends AbstractController
     */
     public function index()
     {
-	// The commands
-	$commands = array(
-		'echo $PWD',
-		'whoami',
-		'git pull /home/git/croissantologue.fr/',
-		'git status',
-		'composer install /home/git/croissantologue.fr/app/',
-	);
-	// Run the commands for output
-	$output = '';
-	foreach($commands AS $command){
-		// Run it
-		$tmp = system($command);
-		// Output
-		$output .= "<span style=\"color: #6BE234;\">\$</span> <span style=\"color: #729FCF;\">{$command}\n</span><br />";
-		$output .= htmlentities(trim($tmp)) . "<br />";
-	}
+        $old_path = getcwd();
+        chdir('/home/git/croissantologue.fr/');
+        //make sure to make the shell file executeable first before running the shell_exec function
+        $output = shell_exec('./deploy.sh');
+        chdir($old_path);
     
 	return new Response(
             '<html><body> '.$output.'</body></html>'
