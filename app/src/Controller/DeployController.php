@@ -16,7 +16,7 @@ class DeployController extends AbstractController
         $old_path = getcwd();
         chdir('/home/git/croissantologue.fr/prod/');
         //make sure to make the shell file executeable first before running the shell_exec function
-        system ('git pull /home/git/croissantologue.fr/prod/ 2>&1', $output);
+        system ('git fetch --all && git checkout --force "origin/master" 2>&1', $output);
         chdir($old_path);
    
 	var_dump($output);exit; 
