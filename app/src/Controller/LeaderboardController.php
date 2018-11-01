@@ -15,7 +15,7 @@ class LeaderboardController extends AbstractController
     public function home()
     {
 
-        $users = $this->getDoctrine()->getRepository('AppBundle:User')->findAll();
+        $users = $this->getDoctrine()->getRepository('Entity:User')->findAll();
 
         return $this->render('homepage.html.twig', [
             'users' => $users
