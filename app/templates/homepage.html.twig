@@ -1,3 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{{ include('leaderboard/listUserRank.html.twig') }}
+ {% block ranking %}
+    {{ include('leaderboard/listUserRank.html.twig') }}
+{% endblock %}
