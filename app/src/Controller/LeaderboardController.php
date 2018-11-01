@@ -3,9 +3,9 @@
 // src/Controller/LeaderboardController.php
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\User;
 
 class LeaderboardController extends AbstractController
 {
@@ -15,7 +15,7 @@ class LeaderboardController extends AbstractController
     public function home()
     {
 
-        $users = $this->getDoctrine()->getRepository('Entity:User')->findAll();
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
 
         return $this->render('homepage.html.twig', [
             'users' => $users
