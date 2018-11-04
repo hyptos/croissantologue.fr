@@ -1,6 +1,8 @@
 <?php
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -52,8 +54,14 @@ class User implements UserInterface, \Serializable {
      */
     private $roles = array();
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Grade", mappedBy="ref_id_user")
+     */
+    private $ref_id_grade;
+
     public function __construct() {
         $this->isActive = true;
+        $this->ref_id_grade = new ArrayCollection();
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
@@ -150,6 +158,34 @@ class User implements UserInterface, \Serializable {
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Grade[]
+     */
+    public function getRefIdGrade(): Collection
+    {
+        return $this->ref_id_grade;
+    }
+
+    public function addRefIdGrade(Grade $refIdGrade): self
+    {
+        if (!$this->ref_id_grade->contains($refIdGrade)) {
+            $this->ref_id_grade[] = $refIdGrade;
+            $refIdGrade->addRefIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRefIdGrade(Grade $refIdGrade): self
+    {
+        if ($this->ref_id_grade->contains($refIdGrade)) {
+            $this->ref_id_grade->removeElement($refIdGrade);
+            $refIdGrade->removeRefIdUser($this);
+        }
 
         return $this;
     }
