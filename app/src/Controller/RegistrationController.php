@@ -9,6 +9,8 @@
 // src/Controller/RegistrationController.php
 namespace App\Controller;
 
+use App\Entity\Place;
+use App\Form\PlaceType;
 use App\Form\UserType;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,9 +21,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/register", name="user_registration")
+     * @Route("/user/register", name="user_registration")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function user(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         // 1) build the form
         $user = new User();
@@ -45,6 +50,33 @@ class RegistrationController extends AbstractController
             $this->addFlash('success', 'Votre compte à bien été enregistré.');
 
             return $this->redirectToRoute('admin');
+        }
+
+        return $this->render(
+            'registration/register.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    /**
+     * @Route("/place/register", name="place_registration")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function place(Request $request)
+    {
+        // 1) build the form
+        $objPlace = new Place();
+        $form = $this->createForm(PlaceType::class, $objPlace);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // 4) save the User!
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($objPlace);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre endroit à bien été enregistré.');
         }
 
         return $this->render(
