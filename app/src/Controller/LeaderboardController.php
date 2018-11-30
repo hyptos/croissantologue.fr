@@ -27,6 +27,10 @@ class LeaderboardController extends AbstractController
      */
     public function dashboard()
     {
-        return $this->render('homepage.html.twig');
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+
+        return $this->render('homepage.html.twig', [
+            'users' => $users
+        ]);
     }
 }
