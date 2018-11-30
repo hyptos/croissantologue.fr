@@ -45,6 +45,14 @@
                 <li class="nav-item {% if mainNavAdmin is defined %}active{% endif %}">
                     <a class="nav-link" href="{{path('place_registration')}}">Ajouter un magasin</a>
                 </li>
+                <li class="nav-item {% if mainNavAdmin is defined %}active{% endif %}">
+                    <a class="nav-link" href="{{path('category_registration')}}">Ajouter une catégorie</a>
+                </li>
+            {% endif %}
+            {% if is_granted('ROLE_USER') %}
+                <li class="nav-item {% if mainNavAdmin is defined %}active{% endif %}">
+                    <a class="nav-link" href="{{path('grade_registration')}}">Ajouter une note</a>
+                </li>
             {% endif %}
         </ul>
         <ul class="navbar-nav ml-auto">

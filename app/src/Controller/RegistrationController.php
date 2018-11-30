@@ -9,7 +9,10 @@
 // src/Controller/RegistrationController.php
 namespace App\Controller;
 
+use App\Entity\Category;
+use App\Entity\Grade;
 use App\Entity\Place;
+use App\Form\CategoryType;
 use App\Form\PlaceType;
 use App\Form\UserType;
 use App\Entity\User;
@@ -72,11 +75,62 @@ class RegistrationController extends AbstractController
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($objPlace);
             $entityManager->flush();
             $this->addFlash('success', 'Votre endroit à bien été enregistré.');
+        }
+
+        return $this->render(
+            'registration/register.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    /**
+     * @Route("/category/register", name="category_registration")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function category(Request $request)
+    {
+        // 1) build the form
+        $objCategory = new Category();
+        $form = $this->createForm(CategoryType::class, $objCategory);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($objCategory);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre catégorie à bien été enregistré.');
+        }
+
+        return $this->render(
+            'registration/register.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    /**
+     * @Route("/grade/register", name="grade_registration")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function grade(Request $request)
+    {
+        // 1) build the form
+        $objGrade = new Grade();
+        $form = $this->createForm(CategoryType::class, $objGrade);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($objGrade);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre note à bien été enregistré.');
         }
 
         return $this->render(

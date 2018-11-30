@@ -22,6 +22,14 @@ place_registration:
   path: /place/register
   controller: App\Controller\RegistrationController::place
 
+category_registration:
+  path: /category/register
+  controller: App\Controller\RegistrationController::category
+
+grade_registration:
+  path: /grade/register
+  controller: App\Controller\RegistrationController::grade
+
 deploy:
   path: /deploy
   controller: App\Controller\DeployController::index
