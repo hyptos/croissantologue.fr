@@ -13,6 +13,7 @@ use App\Entity\Category;
 use App\Entity\Grade;
 use App\Entity\Place;
 use App\Form\CategoryType;
+use App\Form\GradeType;
 use App\Form\PlaceType;
 use App\Form\UserType;
 use App\Entity\User;
@@ -122,7 +123,7 @@ class RegistrationController extends AbstractController
     {
         // 1) build the form
         $objGrade = new Grade();
-        $form = $this->createForm(CategoryType::class, $objGrade);
+        $form = $this->createForm(GradeType::class, $objGrade);
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
