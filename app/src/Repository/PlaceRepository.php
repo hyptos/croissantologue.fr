@@ -47,4 +47,10 @@ class PlaceRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function createAlphabeticalQueryBuilder()
+    {
+        return $this->createQueryBuilder('place')
+            ->orderBy('place.name', 'ASC');
+    }
 }

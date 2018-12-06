@@ -15,9 +15,22 @@ class GradeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('place', TextType::class)
-            ->add('category', TextType::class)
+            ->add('place', PlaceType::class, [
+                'placeholder' => 'Choose a place',
+                'class' => Place::class,
+                'query_builder' => function(PlaceRepository $repo) {
+                    return $repo->createAlphabeticalQueryBuilder();
+                }
+            ])
             ->add('value', TextType::class)
+            ->add('category', CategoryType::class, [
+                'placeholder' => 'Choose a category',
+                'class' => Category::class,
+                'query_builder' => function(CategoryRepository $repo) {
+                    return $repo->createAlphabeticalQueryBuilder();
+                }
+            ])
+
             ->add('save', SubmitType::class, array('label' => 'Envoyer'))
         ;
     }
