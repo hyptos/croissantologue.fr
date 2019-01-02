@@ -1,0 +1,43 @@
+index:
+    path: /
+    controller: App\Controller\LeaderboardController::home
+
+leaderboard:
+  path: /dashboard
+  controller: App\Controller\LeaderboardController::dashboard
+
+profil:
+  path: /profil
+  controller: App\Controller\ProfileController::index
+
+login:
+  path: /login
+  controller: App\Controller\SecurityController::login
+
+admin:
+  path: /profile
+  controller: App\Controller\ProfileController::admin
+
+registration:
+  path: /user/register
+  controller: App\Controller\RegistrationController::user
+
+place_registration:
+  path: /place/register
+  controller: App\Controller\RegistrationController::place
+
+category_registration:
+  path: /category/register
+  controller: App\Controller\RegistrationController::category
+
+grade_registration:
+  path: /grade/register
+  controller: App\Controller\RegistrationController::grade
+
+deploy:
+  path: /deploy
+  controller: App\Controller\DeployController::index
+
+logout:
+  path: /logout
+
