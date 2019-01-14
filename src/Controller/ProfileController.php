@@ -8,7 +8,7 @@ use App\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-/** @Route("/profile") */
+/** @Route("/profile") **/
 class ProfileController extends Controller
 {
 

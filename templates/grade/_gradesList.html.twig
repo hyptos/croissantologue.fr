@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-12">
+    <h2>Liste de mes notes</h2>
+
+    {%  if grades %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Place</th>
+            <th scope="col">Category</th>
+            <th scope="col">Note</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for grade in grades %}
+            <tr>
+                <td>{{ grade.id|e }}</td>
+                <td>{{ grade.place|e }}</td>
+                <td>{{ grade.category|e }}</td>
+                <td>{{ grade.value|e }}</td>
+                <td><a href="{{ path('grade_edit', {'id': grade.id}) }}" type="button" class="btn btn-success">Edit</a></td>
+                <td><a href="{{ path('grade_delete', {'id': grade.id}) }}" type="button" class="btn btn-danger">Delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>Aucune notes disponible.</p>
+    {% endif %}
+    </div>
+</div>
