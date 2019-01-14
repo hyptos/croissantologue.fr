@@ -59,9 +59,30 @@ class User implements UserInterface, \Serializable {
      */
     private $ref_id_grade;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $birthdate;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Grade", mappedBy="user")
+     */
+    private $grades;
+
     public function __construct() {
         $this->isActive = true;
         $this->ref_id_grade = new ArrayCollection();
+        $this->grades = new ArrayCollection();
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
@@ -91,9 +112,14 @@ class User implements UserInterface, \Serializable {
         return $this->roles;
     }
 
-    function addRole($role) {
+    public function getFullName() {
+        return $this->getName() . ' '. $this->getFirstname();
+    }
+
+    public function addRole($role) {
         $this->roles[] = $role;
     }
+
 
     public function eraseCredentials() {
 
@@ -185,6 +211,73 @@ class User implements UserInterface, \Serializable {
         if ($this->ref_id_grade->contains($refIdGrade)) {
             $this->ref_id_grade->removeElement($refIdGrade);
             $refIdGrade->removeRefIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getBirthdate(): ?\DateTimeInterface
+    {
+        return $this->birthdate;
+    }
+
+    public function setBirthdate(?\DateTimeInterface $birthdate): self
+    {
+        $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(?string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Grade[]
+     */
+    public function getGrades(): Collection
+    {
+        return $this->grades;
+    }
+
+    public function addGrade(Grade $grade): self
+    {
+        if (!$this->grades->contains($grade)) {
+            $this->grades[] = $grade;
+            $grade->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGrade(Grade $grade): self
+    {
+        if ($this->grades->contains($grade)) {
+            $this->grades->removeElement($grade);
+            // set the owning side to null (unless already changed)
+            if ($grade->getUser() === $this) {
+                $grade->setUser(null);
+            }
         }
 
         return $this;

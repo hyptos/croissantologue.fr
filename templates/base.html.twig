@@ -53,7 +53,7 @@
         <ul class="navbar-nav ml-auto">
             {% if is_granted('ROLE_USER') %}
                 <li class="nav-item {% if mainNavMember is defined %}active{% endif %}">
-                    <a class="nav-link" href="{{path('profil')}}">Profil</a>
+                    <a class="nav-link" href="{{path('profile', {'id': app.user.id} )}}">Profil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{path('logout')}}">Déconnexion</a>

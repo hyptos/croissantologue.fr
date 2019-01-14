@@ -26,6 +26,8 @@ class GradeRepository extends ServiceEntityRepository
     public function findByUser($intIdUser)
     {
         return $this->createQueryBuilder('grade')
+            ->andWhere('grade.user = :val')
+            ->setParameter('val', $intIdUser)
             ->orderBy('grade.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()

@@ -39,6 +39,12 @@ class Grade
      */
     private $ref_id_category;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="grades")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->ref_id_user = new ArrayCollection();
@@ -131,6 +137,18 @@ class Grade
     public function setCategory(?Category $ref_id_category): self
     {
         $this->ref_id_category = $ref_id_category;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

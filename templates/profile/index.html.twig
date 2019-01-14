@@ -14,9 +14,9 @@
                                 </div>
                                 <div class="userData ml-3">
                                     <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a
-                                                href="javascript:void(0);">Some Name</a></h2>
-                                    <h6 class="d-block"><a href="javascript:void(0)">1,500</a> Video Uploads</h6>
-                                    <h6 class="d-block"><a href="javascript:void(0)">300</a> Blog Posts</h6>
+                                                href="javascript:void(0);">{{ user.fullName }}</a></h2>
+                                    <h6 class="d-block"><a href="javascript:void(0)">1,500</a> notes</h6>
+                                    <h6 class="d-block"><a href="javascript:void(0)">300</a> croissants</h6>
                                 </div>
                                 <div class="ml-auto">
                                     <input type="button" class="btn btn-primary d-none" id="btnDiscard"
@@ -44,7 +44,7 @@
                                                 <label style="font-weight:bold;">Full Name</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                Some Name
+                                                {{ user.fullName }}
                                             </div>
                                         </div>
                                         <hr/>
@@ -54,7 +54,7 @@
                                                 <label style="font-weight:bold;">Birth Date</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                March 22, 1994.
+                                                {{ user.birthdate|date("d/m/Y") }}
                                             </div>
                                         </div>
                                         <hr/>
@@ -65,60 +65,15 @@
                                                 <label style="font-weight:bold;">Email</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                {{ app.user.email }}
+                                                {{ user.email }}
                                             </div>
                                         </div>
                                         <hr/>
-                                        <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Something</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                                Something
-                                            </div>
-                                        </div>
-                                        <hr/>
-                                        <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Something</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                                Something
-                                            </div>
-                                        </div>
-                                        <hr/>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <h2>Liste de mes notes</h2>
-
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Place</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Note</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    {% for grade in grades %}
-                                        <tr>
-                                            <td>{{ grade.id|e }}</td>
-                                            <td>{{ grade.place|e }}</td>
-                                            <td>{{ grade.category|e }}</td>
-                                            <td>{{ grade.value|e }}</td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-
-
-
+                        {% include 'grade/_gradesList.html.twig' %}
                     </div>
 
                 </div>

@@ -7,8 +7,10 @@ leaderboard:
   controller: App\Controller\LeaderboardController::dashboard
 
 profil:
-  path: /profil
+  path: /profile/{id}
   controller: App\Controller\ProfileController::index
+  requirements:
+    id: '\d+'
 
 login:
   path: /login
