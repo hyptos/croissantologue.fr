@@ -20,10 +20,20 @@ use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Security;
 
 class RegistrationController extends AbstractController
 {
+    private $user = null;
+
+    public function __construct(Security $security)
+    {
+        $this->user = $security->getUser();
+    }
+
+
     /**
      * @Route("/user/register", name="user_registration")
      * @param Request $request
@@ -118,11 +128,14 @@ class RegistrationController extends AbstractController
      * @Route("/grade/register", name="grade_registration")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function grade(Request $request)
     {
         // 1) build the form
         $objGrade = new Grade();
+        $objGrade->setDateInserted(new \DateTime());
+        $objGrade->setUser($this->user);
         $form = $this->createForm(GradeType::class, $objGrade);
 
         // 2) handle the submit (will only happen on POST)
@@ -133,7 +146,6 @@ class RegistrationController extends AbstractController
             $entityManager->persist($objGrade);
             $entityManager->flush();
             unset($objGrade);
-            unset($form);
             $this->addFlash('success', 'Votre note à bien été enregistré.');
         }
 

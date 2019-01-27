@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class EditController extends Controller
 {
     /**
-     * @Route("/grade/{id}",  name="edit_grade", requirements={"id"="\d+"})
+     * @Route("/grade/{id}",  name="grade_edit", requirements={"id"="\d+"})
      * @param Request $request
      * @param $id
      * @return

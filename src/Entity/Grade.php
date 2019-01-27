@@ -45,6 +45,11 @@ class Grade
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date_inserted;
+
     public function __construct()
     {
         $this->ref_id_user = new ArrayCollection();
@@ -149,6 +154,18 @@ class Grade
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDateInserted(): ?\DateTimeInterface
+    {
+        return $this->date_inserted;
+    }
+
+    public function setDateInserted(\DateTimeInterface $date_inserted): self
+    {
+        $this->date_inserted = $date_inserted;
 
         return $this;
     }
