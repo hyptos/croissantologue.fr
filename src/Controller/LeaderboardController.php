@@ -3,6 +3,7 @@
 // src/Controller/LeaderboardController.php
 namespace App\Controller;
 
+use App\Repository\UserRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\User;

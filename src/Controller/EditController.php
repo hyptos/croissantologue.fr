@@ -16,11 +16,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Security;
 
 
 /** @Route("/edit") **/
 class EditController extends Controller
 {
+    private $user = null;
+
+    public function __construct(Security $security)
+    {
+        $this->user = $security->getUser();
+    }
+
+
     /**
      * @Route("/grade/{id}",  name="grade_edit", requirements={"id"="\d+"})
      * @param Request $request
@@ -31,6 +40,12 @@ class EditController extends Controller
         // 1) build the form
         $objGrade = $this->getDoctrine()->getRepository(Grade::class)->find($id);
         $form = $this->createForm(GradeType::class, $objGrade);
+
+        if ($objGrade->getUser() !== $this->user) {
+            return $this->render(
+                'security/403.html.twig'
+            );
+        }
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);

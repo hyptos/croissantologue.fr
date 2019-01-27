@@ -38,9 +38,15 @@ class Place
      */
     private $ref_id_grade;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="place")
+     */
+    private $events;
+
     public function __construct()
     {
         $this->ref_id_grade = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -119,5 +125,36 @@ class Place
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setPlace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->contains($event)) {
+            $this->events->removeElement($event);
+            // set the owning side to null (unless already changed)
+            if ($event->getPlace() === $this) {
+                $event->setPlace(null);
+            }
+        }
+
+        return $this;
     }
 }

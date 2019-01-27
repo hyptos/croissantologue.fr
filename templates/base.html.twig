@@ -46,6 +46,9 @@
             {% endif %}
             {% if is_granted('ROLE_USER') %}
                 <li class="nav-item {% if mainNavAdmin is defined %}active{% endif %}">
+                    <a class="nav-link" href="{{path('event_registration')}}">Ajouter un événement</a>
+                </li>
+                <li class="nav-item {% if mainNavAdmin is defined %}active{% endif %}">
                     <a class="nav-link" href="{{path('grade_registration')}}">Ajouter une note</a>
                 </li>
             {% endif %}
@@ -97,6 +100,8 @@
     {% block body %}
     {% endblock %}
 </div>
+
+<br />
 
 {% block footer %}
     <footer id="footer" class="bck1 border-top">

@@ -28,9 +28,15 @@ class Category
      */
     private $ref_id_grade;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="category")
+     */
+    private $place;
+
     public function __construct()
     {
         $this->ref_id_grade = new ArrayCollection();
+        $this->place = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -84,5 +90,36 @@ class Category
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEvent(): Collection
+    {
+        return $this->event;
+    }
+
+    public function addPlace(Event $event): self
+    {
+        if (!$this->event->contains($event)) {
+            $this->event[] = $event;
+            $event->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlace(Event $event): self
+    {
+        if ($this->event->contains($event)) {
+            $this->event->removeElement($event);
+            // set the owning side to null (unless already changed)
+            if ($event->getCategory() === $this) {
+                $event->setCategory(null);
+            }
+        }
+
+        return $this;
     }
 }

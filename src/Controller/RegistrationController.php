@@ -10,12 +10,14 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Event;
 use App\Entity\Grade;
 use App\Entity\Place;
 use App\Form\CategoryType;
 use App\Form\GradeType;
 use App\Form\PlaceType;
 use App\Form\UserType;
+use App\Form\EventType;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -147,6 +149,36 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             unset($objGrade);
             $this->addFlash('success', 'Votre note à bien été enregistré.');
+        }
+
+        return $this->render(
+            'registration/register.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    /**
+     * @Route("/event/register", name="event_registration")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function event(Request $request)
+    {
+        // 1) build the form
+        $objEvent = new Event();
+        $objEvent->setDateInserted(new \DateTime());
+        $form = $this->createForm(EventType::class, $objEvent);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($objEvent);
+            $entityManager->flush();
+            unset($objEvent);
+            $this->addFlash('success', 'Votre event à bien été enregistré.');
         }
 
         return $this->render(
