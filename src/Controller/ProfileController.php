@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Grade;
+use App\Entity\Event;
 use App\Entity\User;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -30,9 +31,22 @@ class ProfileController extends Controller
         // On recupère les notes
         $grades = $this->getDoctrine()->getRepository(Grade::class)->findByUser($id);
 
+        // nbEvents par user
+        $nbNotes = $this->getDoctrine()->getRepository(Grade::class)->countByUser($id);
+
+        // On recupère les events
+        $events = $this->getDoctrine()->getRepository(Event::class)->findByUser($id);
+
+        // nbEvents par user
+        $nbEvents = $this->getDoctrine()->getRepository(Event::class)->countByUser($id);
+
+
         return $this->render('profile/index.html.twig', [
             'mainNavMember' => true,
             'grades' => $grades,
+            'events' => $events,
+            'nbEvents' => $nbEvents,
+            'nbNotes' => $nbNotes,
             'user' => $objUser,
             'title' => 'My profile'
         ]);

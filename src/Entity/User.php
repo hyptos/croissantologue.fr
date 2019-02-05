@@ -79,10 +79,6 @@ class User implements UserInterface, \Serializable {
      */
     private $grades;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="user")
-     */
-    private $event;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="user")

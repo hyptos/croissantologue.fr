@@ -15,8 +15,8 @@
                                 <div class="userData ml-3">
                                     <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a
                                                 href="javascript:void(0);">{{ user.fullName }}</a></h2>
-                                    <h6 class="d-block"><a href="javascript:void(0)">1,500</a> notes</h6>
-                                    <h6 class="d-block"><a href="javascript:void(0)">300</a> croissants</h6>
+                                    <h6 class="d-block"><a href="javascript:void(0)">{{ nbEvents }}</a> events</h6>
+                                    <h6 class="d-block"><a href="javascript:void(0)">{{ nbNotes }}</a> notes</h6>
                                 </div>
                                 <div class="ml-auto">
                                     <input type="button" class="btn btn-primary d-none" id="btnDiscard"
@@ -74,6 +74,7 @@
                             </div>
                         </div>
                         {% include 'grade/_gradesList.html.twig' %}
+                        {% include 'event/_eventsList.html.twig' %}
                     </div>
 
                 </div>

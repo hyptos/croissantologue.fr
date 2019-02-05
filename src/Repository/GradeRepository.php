@@ -45,4 +45,15 @@ class GradeRepository extends ServiceEntityRepository
         ;
     }
 
+    public function countByUser($intIdUser) {
+        return $this->createQueryBuilder('grade')
+            ->select('count(grade.id)')
+            ->andWhere('grade.user = :val')
+            ->setParameter('val', $intIdUser)
+            ->orderBy('grade.id', 'ASC')
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
 }

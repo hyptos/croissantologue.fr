@@ -63,6 +63,39 @@ class EditController extends Controller
         );
     }
 
+    /**
+     * @Route("/event/{id}",  name="event_edit", requirements={"id"="\d+"})
+     * @param Request $request
+     * @param $id
+     * @return
+     */
+    public function event(Request $request, $id) {
+        // 1) build the form
+        $objEvent = $this->getDoctrine()->getRepository(Event::class)->find($id);
+        $form = $this->createForm(EventType::class, $objEvent);
+
+        if ($objEvent->getUser() !== $this->user) {
+            return $this->render(
+                'security/403.html.twig'
+            );
+        }
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($objEvent);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre event à bien été enregistré.');
+        }
+
+        return $this->render(
+            'edit/edit.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
     public function user(Request $request) {
 
     }

@@ -81,4 +81,25 @@ class DeleteController extends Controller
 
         return $this->forward('App\Controller\LeaderboardController::dashboard');
     }
+
+    /**
+     * @Route("/event/{id}",  name="event_delete", requirements={"id"="\d+"})
+     * @param Request $request
+     * @param $id
+     * @return
+     */
+    public function event(Request $request, $id) {
+        // 1) build the form
+        /** @var @var Grade $objGrade */
+        $objEvent = $this->getDoctrine()->getRepository(Event::class)->find($id);
+
+        if ($objEvent !== null) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($objEvent);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre event à bien été supprimé.');
+        }
+
+        return $this->forward('App\Controller\LeaderboardController::dashboard');
+    }
 }
