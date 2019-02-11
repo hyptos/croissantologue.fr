@@ -51,12 +51,4 @@ class ProfileController extends Controller
             'title' => 'My profile'
         ]);
     }
-
-    /**
-     * @Route("/admin")
-     */
-    public function admin()
-    {
-        return $this->render('profile/admin.html.twig', ['mainNavMember' => true, 'title' => 'Espace Admin']);
-    }
 }

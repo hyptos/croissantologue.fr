@@ -89,7 +89,9 @@ class Category
 
     public function __toString()
     {
-        return $this->getName();
+        $strName = $this->getName();
+        $bExist = isset($strName);
+        return $bExist ? $this->getName() : '';
     }
 
     /**

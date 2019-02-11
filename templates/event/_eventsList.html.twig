@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-12">
+    <h2>Liste des events</h2>
+
+    {%  if events %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Place</th>
+            <th scope="col">Category</th>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">&nbsp;</th>
+            <th scope="col">&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td>{{ event.id|e }}</td>
+                <td>{{ event.place|e }}</td>
+                <td>{{ event.category|e }}</td>
+                <td>{{ event.name|e }}</td>
+                <td>{{ event.dateInserted|date("d/m/Y") }}</td>
+                <td><a href="{{ path('event_edit', {'id': event.id}) }}" type="button" class="btn btn-success">Edit</a></td>
+                <td><a href="{{ path('event_delete', {'id': event.id}) }}" type="button" class="btn btn-danger">Delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>Aucun event disponible.</p>
+    {% endif %}
+    </div>
+</div>

@@ -335,7 +335,8 @@ class User implements UserInterface, \Serializable {
 
     public function __toString()
     {
-        return $this->getEmail();
+        $bEmail = $this->getEmail();
+        return isset($bEmail) ? $bEmail : '';
     }
 
 }
